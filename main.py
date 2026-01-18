@@ -2,11 +2,11 @@ import calculator
 
 print("Welcome to CLI Calculator!", "Enter 'exit' to quit.", sep='\n')
 
-user_input = 0
 while True:
+
     user_input = input("Enter calculation: ")
 
-    if not user_input != "exit":
+    if user_input == "exit":
         break
 
     user_input = user_input.split(" ")
@@ -15,18 +15,25 @@ while True:
         print("Invalid input format. Use: number operator number")
         continue
 
+    try:
+        a = float(user_input[0])
+        b = float(user_input[2])
+    except ValueError:
+        print("Invalid Number")
+        continue
+
     match user_input[1]:
-        case '+':
-            calc_output = calculator.add(float(user_input[0]), float(user_input[2]))
-        case '-':
-            calc_output = calculator.subtract(float(user_input[0]), float(user_input[2]))
-        case '*':
-            calc_output = calculator.multiply(float(user_input[0]), float(user_input[2]))
-        case '/':
-            calc_output = calculator.divide(float(user_input[0]), float(user_input[2]))
+        case "+":
+            calc_output = calculator.add(a, b)
+        case "-":
+            calc_output = calculator.subtract(a, b)
+        case "*":
+            calc_output = calculator.multiply(a, b)
+        case "/":
+            calc_output = calculator.divide(a, b)
         case _:
             print("Invalid Operation")
-            calc_output = ""
+            calc_output = None
 
-    if calc_output != "":
+    if calc_output is not None:
         print(calc_output)
